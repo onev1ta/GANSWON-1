@@ -1315,7 +1315,7 @@ header .brand { position: relative; top: 18px; }
 /* GANSWON title: bold classic serif */
 .logo {
   font-family: "Times New Roman", Times, "Noto Serif", Georgia, serif;
-  font-weight: 700;
-  letter-spacing: 6px;
+  font-weight: 400;            /* lighter, more refined (was 700 bold) */
+  letter-spacing: 9px;
 }
-@media (max-width: 600px) { .logo { font-size: 24px; letter-spacing: 4px; } }
+@media (max-width: 600px) { .logo { font-size: 25px; letter-spacing: 6px; } }
