@@ -24,7 +24,7 @@ button { font-family: inherit; }
   height: 100svh;
   height: 100lvh;          /* fill the whole screen, even behind the browser bar */
   overflow: hidden;
-  background: #4fa9a6;
+  background: #ffffff;
   color: #171717;
 }
 
