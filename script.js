@@ -134,17 +134,14 @@ function route() {
     // SHOP NOW on the opening screen still glides down.
     const target = hash && document.getElementById(hash);
     const cameFromOtherPage = prevView && prevView !== "shop";
-    if (target) setTimeout(() => {
+    if (target && cameFromOtherPage) {
+      // coming back from a bag / checkout: already in place before the page draws,
+      // so there's no jump
       fitBottom();
-      if (cameFromOtherPage) {
-        // coming back from a bag / checkout: snap so the shop fills the screen exactly,
-        // then check again once the photos and the phone's browser bar have settled
-        snapTo(target);
-        setTimeout(() => { fitBottom(); snapTo(target); }, 150);
-        setTimeout(() => { fitBottom(); snapTo(target); }, 450);
-      } else {
-        target.scrollIntoView({ behavior: "smooth" });
-      }
+      snapTo(target);
+    } else if (target) setTimeout(() => {
+      fitBottom();
+      target.scrollIntoView({ behavior: "smooth" });   // SHOP NOW glides down
     }, 30);
   }
   closeBag();
@@ -727,6 +724,7 @@ function fitBottom() {
   // exactly: no empty space at the bottom, and SHOP NOW still lands on the header
   const arrivals = document.querySelector(".arrivals");
   const header = document.querySelector("header");
+  const keepY = window.scrollY;   // remember where we are so nothing jumps
   arrivals.style.minHeight = "";
   const b0 = document.querySelector("footer"); if (b0) b0.style.marginBottom = "";
   if (document.body.dataset.view !== "shop") return;
@@ -741,10 +739,13 @@ function fitBottom() {
     band.style.marginBottom = under + "px";
     arrivals.style.minHeight = (arrivals.offsetHeight + need - under) + "px";
   }
+  if (window.scrollY !== keepY) {
+    const html = document.documentElement, b = html.style.scrollBehavior;
+    html.style.scrollBehavior = "auto"; window.scrollTo(0, keepY); html.style.scrollBehavior = b;
+  }
 }
 window.addEventListener("resize", fitBottom);
 window.addEventListener("load", fitBottom);
-window.addEventListener("hashchange", () => setTimeout(fitBottom, 50));
 
 /* =========================
    START
