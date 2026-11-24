@@ -22,6 +22,7 @@ button { font-family: inherit; }
   position: relative;
   height: 100vh;
   height: 100svh;
+  height: 100lvh;          /* fill the whole screen, even behind the browser bar */
   overflow: hidden;
   background: #4fa9a6;
   color: #171717;
@@ -1145,7 +1146,7 @@ body[data-view="thanks"] footer { display: none; }
   .menu-links a { font-size: 25px; }
   .hero-mark { width: 52vw; }
   body.loaded .hero-mark { top: 62px; width: 50px; }
-  .hero-shop { bottom: 36px; font-size: 13px; }
+  .hero-shop { bottom: 36px; bottom: calc(36px + 100lvh - 100svh); font-size: 13px; }
 
   /* shop: 2 bags per row */
   .arrivals { padding: 6px 0 4px; }
@@ -1165,6 +1166,7 @@ body[data-view="thanks"] footer { display: none; }
   .product-info { opacity: 1; transform: none; }   /* no hover on phones */
   .product-name, .product-price { font-size: 10px; }
   .marquee { margin: 0; padding: 6px 0; }
+  footer { padding-bottom: 56px; }   /* keeps the band above the phone browser's bottom bar */
   .marquee-track { font-size: 10px; gap: 40px; }
 
   /* product page: name, bag, buttons, color + price, thumbnails, text */
