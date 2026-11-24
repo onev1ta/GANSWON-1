@@ -1289,7 +1289,7 @@ body[data-view="thanks"] footer { display: none; }
 @media (max-width: 600px) { #currency { font-size: 16px; padding: 2px 4px; } }   /* 16px stops iPhone zoom */
 
 /* 간손원 band at the very top of the shop, above GANSWON */
-header { padding-top: 46px; }
+header { padding-top: 62px; }
 header .marquee {
   position: absolute;
   top: 0; left: 0; right: 0;
@@ -1303,7 +1303,7 @@ header .marquee {
 header .marquee-track { font-size: 10px; letter-spacing: 6px; gap: 46px; animation-duration: 30s; }
 header .marquee-track .kr { color: #A9A39A; }
 @media (max-width: 600px) {
-  header { padding-top: 40px; }
+  header { padding-top: 56px; }
   header .marquee { padding: 8px 0 7px; }
   header .marquee-track { font-size: 9px; gap: 34px; }
 }
