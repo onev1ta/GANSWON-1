@@ -1307,3 +1307,7 @@ header .marquee-track .kr { color: #A9A39A; }
   header .marquee { padding: 8px 0 7px; }
   header .marquee-track { font-size: 9px; gap: 34px; }
 }
+
+/* GANSWON + seal sit a bit lower under the band */
+header .brand { position: relative; top: 18px; }
+@media (max-width: 600px) { header .brand { top: 16px; } }
