@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GANSWON</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="intro-playing">
+
+  <!-- =========================
+       OPENING SCREEN / HERO
+       Your photo fills the screen, the big red seal stamps in,
+       then shrinks up to the top and the links fade in.
+  ========================= -->
+  <section class="hero" id="hero">
+    <!-- phones get the tall photo, computers get the wide one -->
+    <picture>
+      <source media="(max-width: 700px)" srcset="images/hero-mobile.jpg">
+      <img src="images/hero-desktop.jpg" alt="GANSWON campaign" class="hero-photo">
+    </picture>
+
+    <!-- the korean logo (seal + GANSWON) -->
+    <img src="images/korean-logo-seal.png" alt="GANSWON" class="hero-mark" id="heroMark">
+
+    <a href="#shop" class="hero-shop">SHOP NOW</a>
+  </section>
+
+  <!-- =========================
+       HEADER
+  ========================= -->
+  <!-- id="shop": SHOP NOW scrolls here, so the whole header + bags show -->
+  <header id="shop">
+
+    <div class="brand">
+      <h1 class="logo">GANSWON</h1>
+      <img src="images/korean-logo-seal.png" alt="GANSWON Korean seal" class="korean-logo">
+    </div>
+
+    <!-- bag icon (left side) with the item count -->
+    <button class="bag-btn" id="bagButton" aria-label="Open shopping bag">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+           stroke-linejoin="round" aria-hidden="true">
+        <path d="M5 8h14l-1 13H6L5 8z"></path>
+        <path d="M9 10V6a3 3 0 0 1 6 0v4"></path>
+      </svg>
+      <span class="bag-count" id="bagCount">0</span>
+    </button>
+
+    <button class="menu" id="menuButton" aria-label="Open menu"
+            aria-expanded="false" aria-controls="menuOverlay">
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <!-- =========================
+       MENU OVERLAY
+  ========================= -->
+  <nav class="menu-overlay" id="menuOverlay">
+    <div class="menu-links">
+      <a href="#shop">SHOP</a>
+      <a href="#about">ABOUT</a>
+      <a href="#contact">CONTACT</a>
+    </div>
+  </nav>
+
+  <!-- =========================
+       SHOP
+       The totes are built by script.js from the PRODUCTS list.
+  ========================= -->
+  <main id="arrivals" class="view view-shop">
+    <section class="arrivals">
+
+      <!-- bag carousel: one bag at a time, slides by itself; arrows or swipe -->
+      <div class="bag-carousel">
+        <button class="bc-arrow" id="bcPrev" aria-label="Previous bag">&#8249;</button>
+        <div class="bc-window">
+          <div class="products" id="productGrid"></div>
+        </div>
+        <button class="bc-arrow" id="bcNext" aria-label="Next bag">&#8250;</button>
+      </div>
+
+    </section>
+
+
+  </main>
+
+  <!-- =========================
+       PRODUCT PAGE (opens when you click a tote)
+  ========================= -->
+  <section class="view view-product" id="productView">
+    <a href="#shop" class="back-link">&larr; BACK TO SHOP</a>
+
+    <div class="pv-grid">
+      <!-- big bag (photo or video) -->
+      <div class="pv-stage">
+        <h2 class="pv-name pv-name-top" id="pvNameTop"></h2>
+        <div class="pv-media">
+          <img id="pvImg" src="" alt="">
+          <video id="pvVid" muted loop playsinline hidden></video>
+        </div>
+      </div>
+
+      <!-- info -->
+      <div class="pv-info">
+        <h2 class="pv-name pv-name-side" id="pvName"></h2>
+
+        <!-- grey SOLD OUT bar, then BUY NOW + ADD TO CART under it -->
+        <div class="pv-soldout" id="pvSoldOut" aria-hidden="true">SOLD OUT</div>
+        <div class="pv-actions" id="pvActions">
+          <button class="pv-buynow" id="buyNow">BUY NOW</button>
+          <button class="pv-add" id="addToCart">ADD TO CART</button>
+        </div>
+
+        <div class="pv-row">
+          <span class="pv-color" id="pvColor"></span>
+          <span class="pv-price-wrap">
+            <span class="pv-price" id="pvPrice"></span>
+            <!-- API 2: currency switcher (Frankfurter) -->
+            <select id="currency" aria-label="Currency">
+              <option>USD</option><option>EUR</option><option>GBP</option>
+              <option>JPY</option><option>KRW</option><option>CAD</option>
+            </select>
+          </span>
+        </div>
+        <p class="api-note" id="rateNote"></p>
+
+        <!-- small pictures: tap one to see it big -->
+        <div class="pv-thumbs" id="pvThumbs"></div>
+
+        <p class="pv-desc" id="pvDetails"></p>
+        <p class="pv-note">* free shipping on all orders over $200. returns accepted within 14 days.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================
+       SHOPPING BAG (slides in from the right)
+  ========================= -->
+  <div class="bag-backdrop" id="bagBackdrop"></div>
+  <aside class="bag-drawer" id="bagDrawer" aria-label="Shopping bag">
+    <div class="bag-top">
+      <p>YOUR BAG</p>
+      <button class="bag-close" id="bagClose" aria-label="Close bag">&times;</button>
+    </div>
+
+    <ul class="bag-items" id="bagItems"></ul>
+    <p class="bag-empty" id="bagEmpty">YOUR BAG IS EMPTY</p>
+
+    <div class="bag-bottom" id="bagBottom">
+      <div class="bag-row"><span>SUBTOTAL</span><span id="bagSubtotal">$0.00</span></div>
+      <p class="bag-note">Shipping calculated at checkout</p>
+      <a href="#checkout" class="btn-dark bag-checkout" id="goCheckout">CHECKOUT</a>
+    </div>
+  </aside>
+
+  <!-- =========================
+       CHECKOUT + PAYMENT
+  ========================= -->
+  <section class="view view-checkout" id="checkoutView">
+    <div class="co-top">
+      <a href="#shop" class="co-brand">GANSWON</a>
+      <a href="#shop" class="back-link">&larr; KEEP SHOPPING</a>
+    </div>
+
+    <!-- This checkout is a demo: nothing is charged and card numbers are never saved or sent. -->
+    <p class="demo-note">DEMO CHECKOUT &mdash; NO REAL PAYMENT IS TAKEN</p>
+
+    <div class="co-grid">
+      <form class="co-form" id="checkoutForm" novalidate>
+        <h3>CONTACT</h3>
+        <input type="email" id="coEmail" placeholder="Email" required>
+
+        <h3>SHIPPING</h3>
+        <input type="text" id="coName" placeholder="Full name" required>
+        <input type="text" id="coAddress" placeholder="Address" required>
+        <div class="co-row">
+          <input type="text" id="coCity" placeholder="City" required>
+          <input type="text" id="coState" placeholder="State" required>
+          <input type="text" id="coZip" placeholder="ZIP" inputmode="numeric" maxlength="5" required>
+        </div>
+        <!-- API 1: typing a ZIP fills in city + state (Zippopotam.us) -->
+        <p class="api-note" id="zipNote">Enter your ZIP and we'll fill in your city and state.</p>
+
+        <h3>PAYMENT</h3>
+        <div class="pay-methods" role="radiogroup">
+          <label class="pay-method">
+            <input type="radio" name="pay" value="card" checked>
+            <span>CREDIT / DEBIT CARD</span>
+          </label>
+          <label class="pay-method">
+            <input type="radio" name="pay" value="paypal">
+            <span>PAYPAL</span>
+          </label>
+          <label class="pay-method">
+            <input type="radio" name="pay" value="apple">
+            <span>APPLE PAY</span>
+          </label>
+        </div>
+
+        <div class="card-fields" id="cardFields">
+          <input type="text" id="cardNumber" placeholder="Card number"
+                 inputmode="numeric" autocomplete="off" maxlength="19">
+          <div class="co-row">
+            <input type="text" id="cardExp" placeholder="MM / YY"
+                   inputmode="numeric" autocomplete="off" maxlength="7">
+            <input type="text" id="cardCvc" placeholder="CVC"
+                   inputmode="numeric" autocomplete="off" maxlength="4">
+          </div>
+          <input type="text" id="cardName" placeholder="Name on card" autocomplete="off">
+        </div>
+
+        <p class="pay-other" id="payOther" hidden></p>
+
+        <p class="co-error" id="coError"></p>
+        <button type="submit" class="btn-dark co-pay" id="payButton">PAY $0.00</button>
+      </form>
+
+      <aside class="co-summary">
+        <h3>ORDER SUMMARY</h3>
+        <ul id="summaryItems"></ul>
+        <div class="bag-row"><span>SUBTOTAL</span><span id="sumSubtotal"></span></div>
+        <div class="bag-row"><span>SHIPPING</span><span id="sumShipping"></span></div>
+        <div class="bag-row discount" id="sumDiscountRow" hidden><span>DISCOUNT (7%)</span><span id="sumDiscount"></span></div>
+
+        <!-- discount code: GANSWON7 = 7% off -->
+        <div class="promo">
+          <input type="text" id="promoInput" placeholder="Discount code" autocomplete="off">
+          <button type="button" id="promoApply">APPLY</button>
+        </div>
+        <p class="promo-msg" id="promoMsg"></p>
+
+        <div class="bag-row total"><span>TOTAL</span><span id="sumTotal"></span></div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- =========================
+       ORDER CONFIRMED
+  ========================= -->
+  <section class="view view-thanks" id="thanksView">
+    <img src="images/korean-logo-seal.png" alt="" class="thanks-seal">
+    <h2>THANK YOU</h2>
+    <p>Your order <strong id="orderNumber"></strong> is confirmed.</p>
+    <p class="thanks-small">A confirmation would be sent to <span id="orderEmail"></span>.</p>
+    <a href="#shop" class="btn-dark">BACK TO SHOP</a>
+  </section>
+
+  <!-- =========================
+       SMS SIGN-UP POP-UP (7% off)
+       Demo for now: phone numbers are not saved or sent anywhere yet.
+       Later, connect a texting service (the "sms link") in script.js.
+  ========================= -->
+  <div class="sms-pop" id="smsPop" aria-hidden="true">
+    <div class="sms-card" role="dialog" aria-modal="true" aria-labelledby="smsTitle">
+      <button class="sms-close" id="smsClose" aria-label="Close">&times;</button>
+      <img src="images/korean-logo-seal.png" alt="" class="sms-seal">
+
+      <!-- step 1: sign up -->
+      <div id="smsStep1">
+        <p class="sms-kicker">GANSWON TEXT CLUB</p>
+        <h2 class="sms-title" id="smsTitle">7% OFF</h2>
+        <p class="sms-sub">Join the text list. First to know about new drops and restocks, plus 7% off your first order.</p>
+        <form id="smsForm" novalidate>
+          <input type="tel" id="smsPhone" placeholder="PHONE NUMBER" inputmode="tel" autocomplete="tel">
+          <p class="sms-error" id="smsError"></p>
+          <button type="submit" class="sms-btn">SIGN UP</button>
+        </form>
+        <p class="sms-fine">By signing up, you agree to receive recurring automated marketing texts from GANSWON at the number provided. Consent is not a condition of purchase. Msg &amp; data rates may apply. Reply STOP to unsubscribe, HELP for help.</p>
+        <button class="sms-no" id="smsNo">NO THANKS</button>
+      </div>
+
+      <!-- step 2: thank you + code -->
+      <div id="smsStep2" hidden>
+        <p class="sms-kicker">YOU'RE IN</p>
+        <h2 class="sms-title">WELCOME</h2>
+        <p class="sms-sub">Use this code at checkout.</p>
+        <button class="sms-code" id="smsCode" type="button">GANSWON7</button>
+        <p class="sms-copied" id="smsCopied">TAP THE CODE TO COPY</p>
+        <button class="sms-btn" id="smsShop">SHOP NOW</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================
+       FOOTER
+  ========================= -->
+  <footer id="contact">
+
+    <!-- moving text band -->
+    <div class="marquee" id="smsBand" role="button" tabindex="0" aria-label="Sign up for texts and get 7% off">
+      <div class="marquee-track">
+        <span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span>
+      </div>
+    </div>
+
+    <p class="footer-copy">&copy; GANSWON</p>
+    <!-- never-stopping stopwatch: starts at LAUNCH_DATE in script.js -->
+    <p class="stopwatch" id="stopwatch" aria-label="GANSWON clock">000:00:00:00.00</p>
+
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
