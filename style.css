@@ -1311,3 +1311,11 @@ header .marquee-track .kr { color: #A9A39A; }
 /* GANSWON + seal sit a bit lower under the band */
 header .brand { position: relative; top: 18px; }
 @media (max-width: 600px) { header .brand { top: 16px; } }
+
+/* GANSWON title: bold classic serif */
+.logo {
+  font-family: "Times New Roman", Times, "Noto Serif", Georgia, serif;
+  font-weight: 700;
+  letter-spacing: 6px;
+}
+@media (max-width: 600px) { .logo { font-size: 24px; letter-spacing: 4px; } }
