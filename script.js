@@ -711,11 +711,11 @@ function fitBottom() {
   const arrivals = document.querySelector(".arrivals");
   const header = document.querySelector("header");
   arrivals.style.minHeight = "";
-  const b0 = document.querySelector("footer .marquee"); if (b0) b0.style.marginBottom = "";
+  const b0 = document.querySelector("footer"); if (b0) b0.style.marginBottom = "";
   if (document.body.dataset.view !== "shop") return;
   const room = document.documentElement.scrollHeight - header.offsetTop;
   const need = window.innerHeight - room;
-  const band = document.querySelector("footer .marquee");
+  const band = document.querySelector("footer");
   band.style.marginBottom = "";
   if (need > 0) {
     // most of the spare space goes around the bags; a little goes under the
