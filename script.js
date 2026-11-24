@@ -720,7 +720,7 @@ function fitBottom() {
   if (need > 0) {
     // most of the spare space goes around the bags; a little goes under the
     // 간손원 band so the band sits a bit higher, closer to the bags
-    const under = Math.min(40, need);
+    const under = Math.min(12, need);
     band.style.marginBottom = under + "px";
     arrivals.style.minHeight = (arrivals.offsetHeight + need - under) + "px";
   }

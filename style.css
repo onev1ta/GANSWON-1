@@ -1166,7 +1166,7 @@ body[data-view="thanks"] footer { display: none; }
   .product-info { opacity: 1; transform: none; }   /* no hover on phones */
   .product-name, .product-price { font-size: 10px; }
   .marquee { margin: 0; padding: 6px 0; }
-  footer { padding-bottom: 56px; }   /* keeps the band above the phone browser's bottom bar */
+  footer { padding-bottom: 14px; }   /* keeps the band above the phone browser's bottom bar */
   .marquee-track { font-size: 10px; gap: 40px; }
 
   /* product page: name, bag, buttons, color + price, thumbnails, text */
