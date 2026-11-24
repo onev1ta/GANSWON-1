@@ -1,4 +1,3 @@
-/* general */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 [hidden] { display: none !important; }
 
@@ -13,18 +12,16 @@ html { scroll-behavior: smooth; }
 
 button { font-family: inherit; }
 
-/* opening screen / hero */
 .hero {
   position: relative;
   height: 100vh;
   height: 100svh;
-  height: 100lvh;          /* fill the whole screen, even behind the browser bar */
+  height: 100lvh;
   overflow: hidden;
   background: #ffffff;
   color: #171717;
 }
 
-/* your photo: starts foggy and slightly zoomed, then comes into focus */
 .hero-photo {
   position: absolute;
   inset: 0;
@@ -38,7 +35,6 @@ button { font-family: inherit; }
 }
 body.loaded .hero-photo { filter: none; transform: scale(1); }
 
-/* the red seal: big and centered while loading */
 .hero-mark {
   position: absolute;
   z-index: 2;
@@ -55,7 +51,7 @@ body.loaded .hero-photo { filter: none; transform: scale(1); }
   from { opacity: 0; transform: translate(-50%, -50%) scale(1.4); }
   to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
-/* ...then it shrinks up to the top like a logo */
+
 body.loaded .hero-mark {
   top: 60px;
   width: 58px;
@@ -84,7 +80,6 @@ body.loaded .hero-mark {
 .hero-shop:hover { border-bottom-color: #171717; }
 body.loaded .hero-shop { opacity: 1; }
 
-/* header */
 header {
   position: relative;
   display: flex;
@@ -107,14 +102,12 @@ header {
   text-align: center;
 }
 
-/* the korean logo seal (korean-logo-seal.png) */
 .korean-logo {
   width: 30px;
   height: 30px;
   object-fit: contain;
 }
 
-/* hamburger menu */
 .menu {
   position: absolute;
   right: 25px;
@@ -139,7 +132,6 @@ header {
 .menu.active span:first-child { transform: translateY(3.75px) rotate(45deg); }
 .menu.active span:nth-child(2) { transform: translateY(-3.75px) rotate(-45deg); }
 
-/* search */
 .search-btn {
   position: absolute;
   left: 25px;
@@ -212,7 +204,6 @@ header {
 }
 .overlay-close:hover { opacity: 0.5; }
 
-/* "Results for ..." line above the grid */
 .search-status {
   text-align: center;
   font-size: 10px;
@@ -238,7 +229,6 @@ header {
   padding: 60px 0;
 }
 
-/* menu overlay */
 .menu-overlay {
   position: fixed;
   inset: 0;
@@ -268,7 +258,6 @@ header {
 }
 .menu-links a:hover { opacity: 0.5; }
 
-/* views */
 .view-product, .view-checkout, .view-thanks { display: none; }
 body[data-view="product"]  .view-product  { display: block; }
 body[data-view="checkout"] .view-checkout { display: block; }
@@ -279,10 +268,9 @@ body:not([data-view="shop"]) .view-shop { display: none; }
 body[data-view="checkout"] header,
 body[data-view="thanks"] header { display: none; }
 
-/* bag button */
 .bag-btn {
   position: absolute;
-  left: 25px;                  /* where the search used to be */
+  left: 25px;
   top: 50%;
   transform: translateY(-50%);
   background: none;
@@ -313,14 +301,13 @@ body[data-view="thanks"] header { display: none; }
 .bag-btn.bump { animation: bump 0.4s ease; }
 @keyframes bump { 50% { transform: translateY(-50%) scale(1.2); } }
 
-/* shop */
 .arrivals {
   padding: 10px 40px 4px;
   display: flex;
   flex-direction: column;
-  justify-content: center;   /* bags sit in the middle of the stretched space */
+  justify-content: center;
 }
-/* (space for SHOP NOW is added under the footer by fitBottom in script.js) */
+
 .view-shop { min-height: 0; }
 .arrivals-head h2 {
   font-size: 15px;
@@ -334,14 +321,12 @@ body[data-view="thanks"] header { display: none; }
   letter-spacing: 1px;
 }
 
-/* one clean row of bags, like a lookbook: big, close together, no text
-   (name + price fade in under a bag when you hover it) */
 .products {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 6px;
   max-width: 1200px;
-  margin: auto auto 24px;   /* bags stay in the middle */
+  margin: auto auto 24px;
 }
 
 .product {
@@ -357,8 +342,6 @@ body.loaded .product:nth-child(2) { transition-delay: 0.1s; }
 body.loaded .product:nth-child(3) { transition-delay: 0.2s; }
 body.loaded .product:nth-child(4) { transition-delay: 0.3s; }
 
-/* bag floats on the page (use PNGs with the background removed) */
-/* bag floats on the page (PNGs with the background removed) */
 .product-img {
   position: relative;
   aspect-ratio: 1 / 1.1;
@@ -375,7 +358,7 @@ body.loaded .product:nth-child(4) { transition-delay: 0.3s; }
   animation: drift 6s ease-in-out infinite;
   transition: transform 0.5s ease;
 }
-/* soft shadow under each bag that breathes with the float */
+
 .product-img::after {
   content: "";
   position: absolute;
@@ -387,7 +370,7 @@ body.loaded .product:nth-child(4) { transition-delay: 0.3s; }
   background: radial-gradient(closest-side, rgba(0,0,0,0.16), transparent);
   animation: shadow 6s ease-in-out infinite;
 }
-/* each bag floats a little out of step, so they "flow" together */
+
 .product:nth-child(2) .product-img img,
 .product:nth-child(2) .product-img::after { animation-delay: -1.5s; }
 .product:nth-child(3) .product-img img,
@@ -426,14 +409,13 @@ body.loaded .product:nth-child(4) { transition-delay: 0.3s; }
   color: #77736D;
 }
 
-/* marquee */
 .marquee {
   overflow: hidden;
   cursor: pointer;
   align-self: stretch;
   margin-left: -20px;
   margin-right: -20px;
-  background: transparent;           /* blends into the page */
+  background: transparent;
   color: #F5F4F0;
   padding: 14px 0;
   margin-top: 0;
@@ -447,17 +429,16 @@ body.loaded .product:nth-child(4) { transition-delay: 0.3s; }
   white-space: nowrap;
   animation: marquee 22s linear infinite;
 }
-/* the Korean name sits on a white tag */
+
 .marquee-track .kr {
   background: transparent;
   border: none;
-  color: #B9B4AB;                    /* soft grey, quiet */
+  color: #B9B4AB;
   padding: 2px 10px;
   letter-spacing: 3px;
 }
 @keyframes marquee { to { transform: translateX(-50%); } }
 
-/* sms sign-up pop-up */
 .sms-pop {
   position: fixed;
   inset: 0;
@@ -575,7 +556,6 @@ body.loaded .product:nth-child(4) { transition-delay: 0.3s; }
 }
 .sms-copied { margin: 10px 0 22px; font-size: 9px; letter-spacing: 2px; color: #77736D; }
 
-/* discount code */
 .promo { display: flex; gap: 8px; margin: 12px 0 4px; }
 .promo input {
   flex: 1;
@@ -604,7 +584,6 @@ body.loaded .product:nth-child(4) { transition-delay: 0.3s; }
 .promo-msg { min-height: 14px; font-size: 10px; letter-spacing: 1px; color: #77736D; margin-bottom: 6px; }
 .bag-row.discount { color: #A3161E; }
 
-/* product page */
 .view-product { padding: 6px 40px 60px; }
 
 .back-link {
@@ -631,7 +610,7 @@ body.loaded .product:nth-child(4) { transition-delay: 0.3s; }
   letter-spacing: 3px;
   text-transform: uppercase;
 }
-.pv-name-top { display: none; }      /* phones only */
+.pv-name-top { display: none; }
 .pv-name-side { margin-bottom: 22px; }
 
 .pv-media {
@@ -661,7 +640,6 @@ body.loaded .product:nth-child(4) { transition-delay: 0.3s; }
   50%      { transform: translateY(-12px) rotate(1.5deg); }
 }
 
-/* BUY NOW (outlined) + ADD TO CART (seal red), side by side */
 .pv-actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -754,7 +732,6 @@ body.loaded .product:nth-child(4) { transition-delay: 0.3s; }
   color: #A3161E;
 }
 
-/* buttons */
 .btn-dark, .btn-line {
   display: block;
   width: 100%;
@@ -782,7 +759,6 @@ body.loaded .product:nth-child(4) { transition-delay: 0.3s; }
 }
 .btn-line:hover { background: #171717; color: #F5F4F0; }
 
-/* shopping bag drawer */
 .bag-backdrop {
   position: fixed;
   inset: 0;
@@ -883,7 +859,6 @@ body.bag-open .bag-drawer { transform: none; }
 .bag-row.total { font-weight: 700; font-size: 13px; padding-top: 10px; }
 .bag-note { font-size: 10px; color: #77736D; margin: 4px 0 14px; }
 
-/* checkout */
 .view-checkout { padding: 28px 40px 60px; max-width: 1100px; margin: 0 auto; }
 
 .co-top {
@@ -987,7 +962,6 @@ body.bag-open .bag-drawer { transform: none; }
 .co-summary li img { width: 56px; height: 56px; object-fit: contain; }
 .co-summary li small { display: block; color: #77736D; margin-top: 2px; }
 
-/* order confirmed */
 .view-thanks {
   min-height: 100vh;
   flex-direction: column;
@@ -1003,7 +977,6 @@ body.bag-open .bag-drawer { transform: none; }
 .thanks-small { color: #77736D; }
 .view-thanks .btn-dark { width: auto; margin-top: 16px; padding: 12px 30px; }
 
-/* footer */
 footer {
   display: flex;
   flex-direction: column;
@@ -1018,14 +991,13 @@ footer {
 body[data-view="checkout"] footer,
 body[data-view="thanks"] footer { display: none; }
 
-/* info slider */
 .info {
   display: flex;
   align-items: center;
   gap: 10px;
   width: 100%;
   max-width: 560px;
-  margin: auto auto 6px;   /* sits under the bags, above the footer */
+  margin: auto auto 6px;
 }
 .info-arrow {
   flex: 0 0 auto;
@@ -1075,7 +1047,6 @@ body[data-view="thanks"] footer { display: none; }
 }
 .info-text a { color: #171717; }
 
-/* never-stopping stopwatch, centered under © GANSWON */
 .stopwatch {
   font-family: "Courier New", Courier, monospace;
   font-variant-numeric: tabular-nums;
@@ -1084,12 +1055,10 @@ body[data-view="thanks"] footer { display: none; }
   white-space: nowrap;
 }
 
-/* tablet */
 @media (max-width: 1000px) {
   .pv-grid { gap: 30px; }
 }
 
-/* mobile */
 @media (max-width: 600px) {
   header { padding: 18px 15px; }
   .logo { font-size: 21px; letter-spacing: 4px; }
@@ -1104,9 +1073,8 @@ body[data-view="thanks"] footer { display: none; }
   body.loaded .hero-mark { top: 62px; width: 50px; }
   .hero-shop { bottom: 36px; bottom: calc(36px + 100lvh - 100svh); font-size: 13px; }
 
-  /* shop: 2 bags per row */
   .arrivals { padding: 6px 0 4px; }
-  /* phones: same single row, swipe sideways */
+
   .products {
     display: flex;
     gap: 4px;
@@ -1119,13 +1087,12 @@ body[data-view="thanks"] footer { display: none; }
   .products::-webkit-scrollbar { display: none; }
   .product { flex: 0 0 86%; scroll-snap-align: center; }
   .products { padding: 0 7%; }
-  .product-info { opacity: 1; transform: none; }   /* no hover on phones */
+  .product-info { opacity: 1; transform: none; }
   .product-name, .product-price { font-size: 10px; }
   .marquee { margin: 0; padding: 6px 0; }
-  footer { padding-bottom: 14px; }   /* keeps the band above the phone browser's bottom bar */
+  footer { padding-bottom: 14px; }
   .marquee-track { font-size: 10px; gap: 40px; }
 
-  /* product page: name, bag, buttons, color + price, thumbnails, text */
   .view-product { padding: 4px 16px 40px; }
   .pv-grid { grid-template-columns: 1fr; gap: 18px; min-height: 0; margin-top: 14px; }
   .pv-name-top { display: block; font-size: 16px; margin-bottom: 14px; }
@@ -1135,19 +1102,17 @@ body[data-view="thanks"] footer { display: none; }
   .pv-row { margin-top: 24px; }
   .pv-thumbs button { width: 64px; height: 64px; }
 
-  /* checkout: one column, summary first */
   .view-checkout { padding: 20px 16px 40px; }
   .co-brand { font-size: 18px; letter-spacing: 4px; }
   .co-grid { grid-template-columns: 1fr; gap: 24px; }
   .co-summary { order: -1; padding: 18px; }
   .co-form input[type="text"],
-  .co-form input[type="email"] { font-size: 16px; }   /* stops iPhone zoom */
+  .co-form input[type="email"] { font-size: 16px; }
   .promo input { font-size: 16px; }
   .stopwatch { font-size: 9px; letter-spacing: 0; }
   .sms-title { font-size: 38px; }
 }
 
-/* accessibility */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     scroll-behavior: auto !important;
@@ -1157,7 +1122,6 @@ body[data-view="thanks"] footer { display: none; }
   }
 }
 
-/* info slider: always wrap text inside its slide */
 .info-text, .info-title { white-space: normal; max-width: 100%; overflow-wrap: break-word; }
 .info-slide > * { max-width: 100%; }
 @media (max-width: 600px) {
@@ -1165,7 +1129,6 @@ body[data-view="thanks"] footer { display: none; }
 }
 .info-slide { text-align: center; }
 
-/* info slider: smaller */
 .info { max-width: 420px; gap: 4px; }
 .info-arrow { font-size: 16px; padding: 4px 6px; }
 .info-slide { gap: 3px; padding-top: 2px; padding-bottom: 2px; }
@@ -1173,11 +1136,8 @@ body[data-view="thanks"] footer { display: none; }
 .info-title { font-size: 9.5px; letter-spacing: 1.5px; }
 .info-text { font-size: 9.5px; line-height: 1.5; }
 
-/* shop: no name or price under the bags (they show on each bag's own page) */
 .products .product-info { display: none !important; }
 
-
-/* bag carousel */
 .bag-carousel {
   display: flex;
   align-items: center;
@@ -1214,8 +1174,6 @@ body[data-view="thanks"] footer { display: none; }
   .bag-carousel { max-width: min(560px, calc(100vh - 260px)); }
 }
 
-
-/* api features */
 .pv-price-wrap { display: inline-flex; align-items: center; gap: 8px; }
 #currency {
   font-family: inherit;
@@ -1236,9 +1194,8 @@ body[data-view="thanks"] footer { display: none; }
   color: #77736D;
 }
 .pv-info .api-note { text-align: right; margin-top: -8px; }
-@media (max-width: 600px) { #currency { font-size: 16px; padding: 2px 4px; } }   /* 16px stops iPhone zoom */
+@media (max-width: 600px) { #currency { font-size: 16px; padding: 2px 4px; } }
 
-/* 간손원 band at the very top of the shop, above GANSWON */
 header { padding-top: 62px; }
 header .marquee {
   position: absolute;
@@ -1246,7 +1203,7 @@ header .marquee {
   margin: 0;
   padding: 9px 0 8px;
   border-bottom: 1px solid rgba(23,23,23,0.06);
-  /* letters fade in and out at the edges */
+
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
           mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
 }
@@ -1258,19 +1215,16 @@ header .marquee-track .kr { color: #A9A39A; }
   header .marquee-track { font-size: 9px; gap: 34px; }
 }
 
-/* GANSWON + seal sit a bit lower under the band */
 header .brand { position: relative; top: 18px; }
 @media (max-width: 600px) { header .brand { top: 16px; } }
 
-/* GANSWON title: bold classic serif */
 .logo {
   font-family: "Times New Roman", Times, "Noto Serif", Georgia, serif;
-  font-weight: 400;            /* lighter, more refined (was 700 bold) */
+  font-weight: 400;
   letter-spacing: 9px;
 }
 @media (max-width: 600px) { .logo { font-size: 25px; letter-spacing: 6px; } }
 
-/* menu: ABOUT opens a short blurb, GET 7% OFF opens the text sign-up */
 .menu-links button {
   background: none; border: none; cursor: pointer; padding: 0;
   font: inherit; color: #171717; font-size: 30px; letter-spacing: 4px;

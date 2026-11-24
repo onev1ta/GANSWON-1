@@ -1,10 +1,9 @@
-/* your totes */
 const PRODUCTS = [
   {
     id: "ativzul",
     name: '"ATIVZUL"',
     price: 145,
-    // photos and videos both work here (a video also needs a .jpg with the same name)
+
     images: ["camo-tote.png", "camo-tote-side.png", "motion-worn.mp4"],
     color: "TEAL CAMO",
     details: "Camo tote with hand-drawn red Canswon lettering. Long shoulder straps plus short carry handles."
@@ -38,12 +37,10 @@ const PRODUCTS = [
 const FREE_SHIPPING_OVER = 200;
 const SHIPPING_COST = 8;
 
-/* small helpers */
 const $ = id => document.getElementById(id);
 const money = n => "$" + n.toFixed(2);
 const findProduct = id => PRODUCTS.find(p => p.id === id);
 
-/* opening screen */
 const hero = $("hero");
 
 function endIntro() {
@@ -54,7 +51,6 @@ function endIntro() {
 setTimeout(endIntro, 2200);
 hero.addEventListener("click", endIntro);
 
-/* shop grid */
 const grid = $("productGrid");
 
 grid.innerHTML = PRODUCTS.map(p => `
@@ -67,13 +63,10 @@ grid.innerHTML = PRODUCTS.map(p => `
   </a>
 `).join("");
 
-
-/* pages */
 function showView(name) {
   document.body.dataset.view = name;
 }
 
-// jump straight to the top (no smooth scroll), now and after the page settles
 function toTop() {
   const html = document.documentElement;
   const old = html.style.scrollBehavior;
@@ -83,7 +76,6 @@ function toTop() {
   requestAnimationFrame(() => { window.scrollTo(0, 0); html.style.scrollBehavior = old; });
 }
 
-// jump (no glide) so `el` sits exactly at the top of the screen
 function snapTo(el) {
   const html = document.documentElement;
   const old = html.style.scrollBehavior;
@@ -116,19 +108,16 @@ function route() {
     toTop();
   } else {
     showView("shop");
-    // #shop or #contact: scroll to that part of the page.
-    // Coming back from another page jumps straight there so it lines up exactly;
-    // SHOP NOW on the opening screen still glides down.
+
     const target = hash && document.getElementById(hash);
     const cameFromOtherPage = prevView && prevView !== "shop";
     if (target && cameFromOtherPage) {
-      // coming back from a bag / checkout: already in place before the page draws,
-      // so there's no jump
+
       fitBottom();
       snapTo(target);
     } else if (target) setTimeout(() => {
       fitBottom();
-      target.scrollIntoView({ behavior: "smooth" });   // SHOP NOW glides down
+      target.scrollIntoView({ behavior: "smooth" });
     }, 30);
   }
   closeBag();
@@ -136,16 +125,14 @@ function route() {
 }
 window.addEventListener("hashchange", route);
 
-/* product page */
-let current = null;   // tote being viewed
-let photo = 0;        // which photo / video is showing
+let current = null;
+let photo = 0;
 
 const pvImg = $("pvImg");
 const pvVid = $("pvVid");
 const isVideo = src => /\.mp4$/i.test(src);
-const posterOf = src => src.replace(/\.mp4$/i, ".jpg");   // video thumbnail picture
+const posterOf = src => src.replace(/\.mp4$/i, ".jpg");
 
-// put a photo or a video on the stage
 function showMedia(src) {
   if (isVideo(src)) {
     pvImg.hidden = true;
@@ -158,7 +145,7 @@ function showMedia(src) {
     pvVid.hidden = true;
     pvImg.hidden = false;
     pvImg.src = src;
-    // cut-out PNGs float; full photos (like the flower shot) stay still
+
     pvImg.classList.toggle("still", /\.jpe?g$/i.test(src));
   }
 }
@@ -171,15 +158,13 @@ function openProduct(p) {
   $("pvName").textContent = p.name;
   $("pvNameTop").textContent = p.name;
   $("pvColor").textContent = p.color;
-  showPrice();   // uses the chosen currency (see CURRENCY SWITCHER below)
+  showPrice();
   $("pvDetails").textContent = p.details;
   pvImg.alt = plain;
   showMedia(p.images[0]);
 
-  // grey SOLD OUT bar sits above BUY NOW + ADD TO CART (for the look)
   $("addToCart").textContent = "ADD TO CART";
 
-  // thumbnails
   $("pvThumbs").innerHTML = p.images.map((src, i) => isVideo(src)
     ? `<button type="button" class="thumb-vid ${i === 0 ? "on" : ""}" data-i="${i}" aria-label="Play video">
          <img src="${posterOf(src)}" alt=""><span class="play">&#9654;</span></button>`
@@ -205,7 +190,6 @@ $("pvThumbs").addEventListener("click", e => {
   if (b) goToPhoto(Number(b.dataset.i));
 });
 
-// swipe the big picture on phones
 let touchX = 0;
 [pvImg, pvVid].forEach(el => {
   el.addEventListener("touchstart", e => { touchX = e.touches[0].clientX; }, { passive: true });
@@ -230,7 +214,6 @@ $("buyNow").addEventListener("click", () => {
   location.hash = "checkout";
 });
 
-/* api 2: currency switcher (frankfurter.dev, free, no key) */
 let currency = "USD";
 let rate = 1;
 
@@ -241,8 +224,6 @@ function showPrice() {
   }).format(amount);
 }
 
-// backup rates, used only if the live API can't be reached
-// (for example inside a preview that blocks outside websites)
 const BACKUP_RATES = { EUR: 0.92, GBP: 0.79, JPY: 151.3, KRW: 1380, CAD: 1.39 };
 
 $("currency").addEventListener("change", async () => {
@@ -257,21 +238,20 @@ $("currency").addEventListener("change", async () => {
   try {
     const res = await fetch("https://api.frankfurter.dev/v1/latest?base=USD&symbols=" + currency);
     if (!res.ok) throw new Error("bad response");
-    const data = await res.json();          // e.g. { rates: { EUR: 0.92 }, date: "2026-11-24" }
+    const data = await res.json();
     rate = data.rates[currency];
     $("rateNote").textContent = "1 USD = " + rate + " " + currency + " · live rate from " + data.date + " · you pay in USD";
   } catch (err) {
-    // no internet / blocked: fall back to the saved rate instead of failing
+
     rate = BACKUP_RATES[currency];
     $("rateNote").textContent = "1 USD ≈ " + rate + " " + currency + " · saved rate (live rates offline) · you pay in USD";
   }
   showPrice();
 });
 
-/* cart */
 let cart = [];
 try { cart = JSON.parse(localStorage.getItem("ganswon-cart")) || []; } catch (e) { cart = []; }
-cart = cart.filter(item => findProduct(item.id));   // drop totes that no longer exist
+cart = cart.filter(item => findProduct(item.id));
 
 function saveCart() {
   try { localStorage.setItem("ganswon-cart", JSON.stringify(cart)); } catch (e) {}
@@ -339,8 +319,6 @@ $("bagButton").addEventListener("click", openBag);
 $("bagClose").addEventListener("click", closeBag);
 $("bagBackdrop").addEventListener("click", closeBag);
 
-/* checkout + payment */
-/* 7% off with the code from the text sign-up */
 const DISCOUNT_CODE = "GANSWON7";
 const DISCOUNT_RATE = 0.07;
 let codeApplied = false;
@@ -371,14 +349,13 @@ function fillCheckout() {
   $("sumDiscountRow").hidden = !codeApplied;
   $("sumDiscount").textContent = "−" + money(discountAmount());
   $("sumTotal").textContent = money(orderTotal());
-  // fill in the code automatically if they signed up for texts
+
   let saved = null;
   try { saved = localStorage.getItem("ganswon-code"); } catch (e) {}
   if (saved && !$("promoInput").value) $("promoInput").value = saved;
   updatePayButton();
 }
 
-// payment method switch
 const payInputs = document.querySelectorAll('input[name="pay"]');
 function payMethod() { return document.querySelector('input[name="pay"]:checked').value; }
 
@@ -399,7 +376,6 @@ function updatePayButton() {
 }
 payInputs.forEach(r => r.addEventListener("change", updatePayButton));
 
-// auto-format card number "4242 4242 4242 4242" and expiry "MM / YY"
 $("cardNumber").addEventListener("input", e => {
   const digits = e.target.value.replace(/\D/g, "").slice(0, 16);
   e.target.value = digits.replace(/(.{4})/g, "$1 ").trim();
@@ -443,7 +419,6 @@ $("checkoutForm").addEventListener("submit", e => {
   }
   $("coError").textContent = "";
 
-  // pretend to process the payment
   const btn = $("payButton");
   btn.disabled = true;
   btn.textContent = "PROCESSING…";
@@ -452,7 +427,6 @@ $("checkoutForm").addEventListener("submit", e => {
     $("orderNumber").textContent = "#GW-" + Math.floor(100000 + Math.random() * 900000);
     $("orderEmail").textContent = $("coEmail").value;
 
-    // clear the card boxes and the bag
     ["cardNumber", "cardExp", "cardCvc", "cardName"].forEach(id => { $(id).value = ""; });
     cart = [];
     saveCart();
@@ -462,7 +436,6 @@ $("checkoutForm").addEventListener("submit", e => {
   }, 1500);
 });
 
-// discount code box
 $("promoApply").addEventListener("click", () => {
   const code = $("promoInput").value.trim().toUpperCase();
   if (code === DISCOUNT_CODE) {
@@ -475,7 +448,6 @@ $("promoApply").addEventListener("click", () => {
   fillCheckout();
 });
 
-/* sms sign-up pop-up */
 const smsPop = $("smsPop");
 let smsSeen = false;
 try { smsSeen = localStorage.getItem("ganswon-sms-seen") === "1"; } catch (e) {}
@@ -493,11 +465,10 @@ function closeSms() {
   smsSeen = true;
 }
 
-// pop up 5 seconds after the opening screen, only on the shop
 setTimeout(function autoSms() {
   if (smsSeen || smsPop.classList.contains("open")) return;
   if (document.body.dataset.view !== "shop" || !document.body.classList.contains("loaded")) {
-    setTimeout(autoSms, 3000);       // try again a bit later
+    setTimeout(autoSms, 3000);
     return;
   }
   openSms();
@@ -509,7 +480,6 @@ $("smsClose").addEventListener("click", closeSms);
 $("smsNo").addEventListener("click", closeSms);
 smsPop.addEventListener("click", e => { if (e.target === smsPop) closeSms(); });
 
-// format the phone number as (555) 123-4567
 $("smsPhone").addEventListener("input", e => {
   const d = e.target.value.replace(/\D/g, "").replace(/^1/, "").slice(0, 10);
   let out = d;
@@ -529,9 +499,6 @@ $("smsForm").addEventListener("submit", e => {
   $("smsPhone").classList.remove("bad");
   $("smsError").textContent = "";
 
-  // LATER: send `digits` to your texting service (the "sms link") here.
-  // For now nothing is saved or sent.
-
   try { localStorage.setItem("ganswon-code", DISCOUNT_CODE); } catch (e) {}
   $("smsPhone").value = "";
   $("smsStep1").hidden = true;
@@ -548,8 +515,6 @@ $("smsShop").addEventListener("click", () => {
   location.hash = "shop";
 });
 
-/* api 1: zip auto-fill (zippopotam.us, free, no key) */
-// backup ZIPs, used only if the live API can't be reached
 const BACKUP_ZIPS = {
   "19114": ["Philadelphia", "PA"], "19103": ["Philadelphia", "PA"],
   "28202": ["Charlotte", "NC"],    "10001": ["New York", "NY"],
@@ -557,8 +522,6 @@ const BACKUP_ZIPS = {
   "60601": ["Chicago", "IL"],      "20001": ["Washington", "DC"]
 };
 
-// every US ZIP starts with 3 digits that belong to one state, so even when the
-// live lookup is offline we can still fill in the state for ANY ZIP
 const ZIP_STATES = [
   [5,5,"NY"],[6,7,"PR"],[8,8,"VI"],[9,9,"PR"],[10,27,"MA"],[28,29,"RI"],[30,38,"NH"],[39,49,"ME"],
   [50,54,"VT"],[55,55,"MA"],[56,59,"VT"],[60,69,"CT"],[70,89,"NJ"],[100,149,"NY"],[150,196,"PA"],
@@ -599,7 +562,7 @@ $("coZip").addEventListener("input", async () => {
   try {
     res = await fetch("https://api.zippopotam.us/us/" + zip);
   } catch (err) {
-    // the API couldn't be reached at all (offline / blocked)
+
     const b = BACKUP_ZIPS[zip];
     const st = stateFromZip(zip);
     if (b) fillPlace(b[0], b[1], "Found: " + b[0] + ", " + b[1] + " (saved list, live lookup offline)");
@@ -613,17 +576,16 @@ $("coZip").addEventListener("input", async () => {
   }
 
   if (!res.ok) {
-    // the API answered, but that ZIP doesn't exist
+
     $("zipNote").textContent = "We couldn't find that ZIP. Please check it, or type your city and state.";
     return;
   }
-  const data = await res.json();            // e.g. { places: [ { "place name": "Charlotte", "state abbreviation": "NC" } ] }
+  const data = await res.json();
   const place = data.places[0];
   fillPlace(place["place name"], place["state abbreviation"],
             "Found: " + place["place name"] + ", " + place["state abbreviation"]);
 });
 
-/* menu */
 const menuButton = $("menuButton");
 const menuOverlay = $("menuOverlay");
 
@@ -637,13 +599,12 @@ function setMenu(open) {
 menuButton.addEventListener("click", () => setMenu(!menuOverlay.classList.contains("open")));
 menuOverlay.querySelectorAll("a").forEach(link => link.addEventListener("click", () => setMenu(false)));
 
-// ABOUT: show / hide the short blurb inside the menu
 $("aboutToggle").addEventListener("click", () => {
   const open = $("menuAbout").hidden;
   $("menuAbout").hidden = !open;
   $("aboutToggle").setAttribute("aria-expanded", open);
 });
-// GET 7% OFF: close the menu and open the text sign-up
+
 $("menuSms").addEventListener("click", () => { setMenu(false); openSms(); });
 
 document.addEventListener("keydown", e => {
@@ -653,7 +614,6 @@ document.addEventListener("keydown", e => {
   closeBag();
 });
 
-/* scroll reveal */
 const revealer = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add("in"); revealer.unobserve(e.target); }
@@ -661,9 +621,7 @@ const revealer = new IntersectionObserver(entries => {
 }, { threshold: 0.15 });
 document.querySelectorAll(".reveal").forEach(el => revealer.observe(el));
 
-/* never-stopping stopwatch */
-// on launch day set this, e.g. new Date("2027-01-15T12:00:00")
-const LAUNCH_DATE = null;   // not launched yet
+const LAUNCH_DATE = null;
 const pad = (n, len) => String(n).padStart(len, "0");
 
 function tickStopwatch() {
@@ -679,7 +637,6 @@ function tickStopwatch() {
 }
 requestAnimationFrame(tickStopwatch);
 
-/* bag carousel */
 (function () {
   const track = $("productGrid");
   const count = track.children.length;
@@ -697,18 +654,16 @@ requestAnimationFrame(tickStopwatch);
     const d = e.changedTouches[0].clientX - sx;
     if (Math.abs(d) > 40) { moved = true; go(i + (d < 0 ? 1 : -1)); restart(); }
   });
-  // a swipe shouldn't also open the bag's page
+
   track.addEventListener("click", e => { if (moved) { e.preventDefault(); moved = false; } }, true);
   restart();
 })();
 
-/* room under the footer */
 function fitBottom() {
-  // stretch the bag row so header + bags + band + footer fill the screen
-  // exactly: no empty space at the bottom, and SHOP NOW still lands on the header
+
   const arrivals = document.querySelector(".arrivals");
   const header = document.querySelector("header");
-  const keepY = window.scrollY;   // remember where we are so nothing jumps
+  const keepY = window.scrollY;
   arrivals.style.minHeight = "";
   const b0 = document.querySelector("footer"); if (b0) b0.style.marginBottom = "";
   if (document.body.dataset.view !== "shop") return;
@@ -717,8 +672,7 @@ function fitBottom() {
   const band = document.querySelector("footer");
   band.style.marginBottom = "";
   if (need > 0) {
-    // most of the spare space goes around the bags; a little goes under the
-    // 간손원 band so the band sits a bit higher, closer to the bags
+
     const under = Math.min(12, need);
     band.style.marginBottom = under + "px";
     arrivals.style.minHeight = (arrivals.offsetHeight + need - under) + "px";
@@ -731,7 +685,6 @@ function fitBottom() {
 window.addEventListener("resize", fitBottom);
 window.addEventListener("load", fitBottom);
 
-/* start */
 drawBag();
 route();
 fitBottom();

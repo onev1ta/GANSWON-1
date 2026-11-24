@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- class project, not launched yet: ask search engines not to list it (remove on launch day) -->
+
   <meta name="robots" content="noindex, nofollow">
   <meta name="description" content="GANSWON (간손원)">
   <title>GANSWON</title>
@@ -12,25 +12,20 @@
 
 <body class="intro-playing">
 
-  <!-- opening screen / hero -->
   <section class="hero" id="hero">
-    <!-- phones get the tall photo, computers get the wide one -->
+
     <picture>
       <source media="(max-width: 700px)" srcset="hero-mobile.jpg">
       <img src="hero-desktop.jpg" alt="GANSWON campaign" class="hero-photo">
     </picture>
 
-    <!-- the korean logo (seal + GANSWON) -->
     <img src="korean-logo-seal.png" alt="GANSWON" class="hero-mark" id="heroMark">
 
     <a href="#shop" class="hero-shop">SHOP NOW</a>
   </section>
 
-  <!-- header -->
-  <!-- id="shop": SHOP NOW scrolls here, so the whole header + bags show -->
   <header id="shop">
 
-    <!-- moving text band (top of the shop) -->
     <div class="marquee" id="smsBand" role="button" tabindex="0" aria-label="Sign up for texts and get 7% off">
       <div class="marquee-track">
         <span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span><span class="kr">간손원</span>
@@ -42,7 +37,6 @@
       <img src="korean-logo-seal.png" alt="GANSWON Korean seal" class="korean-logo">
     </div>
 
-    <!-- bag icon (left side) with the item count -->
     <button class="bag-btn" id="bagButton" aria-label="Open shopping bag">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
            stroke-linejoin="round" aria-hidden="true">
@@ -59,7 +53,6 @@
     </button>
   </header>
 
-  <!-- menu overlay -->
   <nav class="menu-overlay" id="menuOverlay">
     <div class="menu-links">
       <a href="#shop">SHOP</a>
@@ -72,11 +65,9 @@
     </div>
   </nav>
 
-  <!-- shop -->
   <main id="arrivals" class="view view-shop">
     <section class="arrivals">
 
-      <!-- bag carousel: one bag at a time, slides by itself; arrows or swipe -->
       <div class="bag-carousel">
         <button class="bc-arrow" id="bcPrev" aria-label="Previous bag">&#8249;</button>
         <div class="bc-window">
@@ -87,15 +78,13 @@
 
     </section>
 
-
   </main>
 
-  <!-- product page -->
   <section class="view view-product" id="productView">
     <a href="#shop" class="back-link">&larr; BACK TO SHOP</a>
 
     <div class="pv-grid">
-      <!-- big bag (photo or video) -->
+
       <div class="pv-stage">
         <h2 class="pv-name pv-name-top" id="pvNameTop"></h2>
         <div class="pv-media">
@@ -104,11 +93,9 @@
         </div>
       </div>
 
-      <!-- info -->
       <div class="pv-info">
         <h2 class="pv-name pv-name-side" id="pvName"></h2>
 
-        <!-- grey SOLD OUT bar, then BUY NOW + ADD TO CART under it -->
         <div class="pv-soldout" id="pvSoldOut" aria-hidden="true">SOLD OUT</div>
         <div class="pv-actions" id="pvActions">
           <button class="pv-buynow" id="buyNow">BUY NOW</button>
@@ -119,7 +106,7 @@
           <span class="pv-color" id="pvColor"></span>
           <span class="pv-price-wrap">
             <span class="pv-price" id="pvPrice"></span>
-            <!-- API 2: currency switcher (Frankfurter) -->
+
             <select id="currency" aria-label="Currency">
               <option>USD</option><option>EUR</option><option>GBP</option>
               <option>JPY</option><option>KRW</option><option>CAD</option>
@@ -128,7 +115,6 @@
         </div>
         <p class="api-note" id="rateNote"></p>
 
-        <!-- small pictures: tap one to see it big -->
         <div class="pv-thumbs" id="pvThumbs"></div>
 
         <p class="pv-desc" id="pvDetails"></p>
@@ -137,7 +123,6 @@
     </div>
   </section>
 
-  <!-- shopping bag -->
   <div class="bag-backdrop" id="bagBackdrop"></div>
   <aside class="bag-drawer" id="bagDrawer" aria-label="Shopping bag">
     <div class="bag-top">
@@ -155,14 +140,12 @@
     </div>
   </aside>
 
-  <!-- checkout + payment -->
   <section class="view view-checkout" id="checkoutView">
     <div class="co-top">
       <a href="#shop" class="co-brand">GANSWON</a>
       <a href="#shop" class="back-link">&larr; KEEP SHOPPING</a>
     </div>
 
-    <!-- This checkout is a demo: nothing is charged and card numbers are never saved or sent. -->
     <p class="demo-note">DEMO CHECKOUT &mdash; NO REAL PAYMENT IS TAKEN</p>
 
     <div class="co-grid">
@@ -178,7 +161,7 @@
           <input type="text" id="coState" placeholder="State" required>
           <input type="text" id="coZip" placeholder="ZIP" inputmode="numeric" maxlength="5" required>
         </div>
-        <!-- API 1: typing a ZIP fills in city + state (Zippopotam.us) -->
+
         <p class="api-note" id="zipNote">Enter your ZIP and we'll fill in your city and state.</p>
 
         <h3>PAYMENT</h3>
@@ -222,7 +205,6 @@
         <div class="bag-row"><span>SHIPPING</span><span id="sumShipping"></span></div>
         <div class="bag-row discount" id="sumDiscountRow" hidden><span>DISCOUNT (7%)</span><span id="sumDiscount"></span></div>
 
-        <!-- discount code: GANSWON7 = 7% off -->
         <div class="promo">
           <input type="text" id="promoInput" placeholder="Discount code" autocomplete="off">
           <button type="button" id="promoApply">APPLY</button>
@@ -234,7 +216,6 @@
     </div>
   </section>
 
-  <!-- order confirmed -->
   <section class="view view-thanks" id="thanksView">
     <img src="korean-logo-seal.png" alt="" class="thanks-seal">
     <h2>THANK YOU</h2>
@@ -243,13 +224,11 @@
     <a href="#shop" class="btn-dark">BACK TO SHOP</a>
   </section>
 
-  <!-- sms sign-up pop-up -->
   <div class="sms-pop" id="smsPop" aria-hidden="true">
     <div class="sms-card" role="dialog" aria-modal="true" aria-labelledby="smsTitle">
       <button class="sms-close" id="smsClose" aria-label="Close">&times;</button>
       <img src="korean-logo-seal.png" alt="" class="sms-seal">
 
-      <!-- step 1: sign up -->
       <div id="smsStep1">
         <p class="sms-kicker">GANSWON TEXT CLUB</p>
         <h2 class="sms-title" id="smsTitle">7% OFF</h2>
@@ -263,7 +242,6 @@
         <button class="sms-no" id="smsNo">NO THANKS</button>
       </div>
 
-      <!-- step 2: thank you + code -->
       <div id="smsStep2" hidden>
         <p class="sms-kicker">YOU'RE IN</p>
         <h2 class="sms-title">WELCOME</h2>
@@ -275,14 +253,11 @@
     </div>
   </div>
 
-  <!-- footer -->
   <footer id="contact">
 
-
     <p class="footer-copy">&copy; GANSWON</p>
-    <!-- never-stopping stopwatch: starts at LAUNCH_DATE in script.js -->
-    <p class="stopwatch" id="stopwatch" aria-label="GANSWON clock">000:00:00:00.00</p>
 
+    <p class="stopwatch" id="stopwatch" aria-label="GANSWON clock">000:00:00:00.00</p>
 
   </footer>
 
