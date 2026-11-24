@@ -96,6 +96,15 @@ function toTop() {
   requestAnimationFrame(() => { window.scrollTo(0, 0); html.style.scrollBehavior = old; });
 }
 
+// jump (no glide) so `el` sits exactly at the top of the screen
+function snapTo(el) {
+  const html = document.documentElement;
+  const old = html.style.scrollBehavior;
+  html.style.scrollBehavior = "auto";
+  window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY);
+  html.style.scrollBehavior = old;
+}
+
 let lastView = null;
 function route() {
   const prevView = document.body.dataset.view;
@@ -127,7 +136,15 @@ function route() {
     const cameFromOtherPage = prevView && prevView !== "shop";
     if (target) setTimeout(() => {
       fitBottom();
-      target.scrollIntoView({ behavior: cameFromOtherPage ? "instant" : "smooth" });
+      if (cameFromOtherPage) {
+        // coming back from a bag / checkout: snap so the shop fills the screen exactly,
+        // then check again once the photos and the phone's browser bar have settled
+        snapTo(target);
+        setTimeout(() => { fitBottom(); snapTo(target); }, 150);
+        setTimeout(() => { fitBottom(); snapTo(target); }, 450);
+      } else {
+        target.scrollIntoView({ behavior: "smooth" });
+      }
     }, 30);
   }
   closeBag();
