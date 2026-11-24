@@ -1,9 +1,4 @@
-/* =========================================================
-   YOUR TOTES — edit names, prices, photos and text here.
-   Photos: PNGs with the background removed look best
-   (they "float" on the page). Each tote can have several photos;
-   tap the small pictures on the product page to switch.
-========================================================= */
+/* your totes */
 const PRODUCTS = [
   {
     id: "ativzul",
@@ -48,9 +43,7 @@ const $ = id => document.getElementById(id);
 const money = n => "$" + n.toFixed(2);
 const findProduct = id => PRODUCTS.find(p => p.id === id);
 
-/* =========================
-   OPENING SCREEN
-========================= */
+/* opening screen */
 const hero = $("hero");
 
 function endIntro() {
@@ -61,9 +54,7 @@ function endIntro() {
 setTimeout(endIntro, 2200);
 hero.addEventListener("click", endIntro);
 
-/* =========================
-   SHOP GRID (built from PRODUCTS)
-========================= */
+/* shop grid */
 const grid = $("productGrid");
 
 grid.innerHTML = PRODUCTS.map(p => `
@@ -77,11 +68,7 @@ grid.innerHTML = PRODUCTS.map(p => `
 `).join("");
 
 
-/* =========================
-   PAGES — the address bar decides what shows:
-   #shop (or nothing) = shop, #seal-tote = that tote,
-   #checkout = checkout, #thanks = order confirmed
-========================= */
+/* pages */
 function showView(name) {
   document.body.dataset.view = name;
 }
@@ -149,9 +136,7 @@ function route() {
 }
 window.addEventListener("hashchange", route);
 
-/* =========================
-   PRODUCT PAGE
-========================= */
+/* product page */
 let current = null;   // tote being viewed
 let photo = 0;        // which photo / video is showing
 
@@ -245,11 +230,7 @@ $("buyNow").addEventListener("click", () => {
   location.hash = "checkout";
 });
 
-/* =========================
-   API 2: CURRENCY SWITCHER  —  Frankfurter (https://frankfurter.dev)
-   Free, no key. We ask for today's rate from USD to the chosen currency,
-   then show the bag's price converted. Cart and checkout stay in USD.
-========================= */
+/* api 2: currency switcher (frankfurter.dev, free, no key) */
 let currency = "USD";
 let rate = 1;
 
@@ -287,9 +268,7 @@ $("currency").addEventListener("change", async () => {
   showPrice();
 });
 
-/* =========================
-   CART (saved in this browser)
-========================= */
+/* cart */
 let cart = [];
 try { cart = JSON.parse(localStorage.getItem("ganswon-cart")) || []; } catch (e) { cart = []; }
 cart = cart.filter(item => findProduct(item.id));   // drop totes that no longer exist
@@ -360,11 +339,7 @@ $("bagButton").addEventListener("click", openBag);
 $("bagClose").addEventListener("click", closeBag);
 $("bagBackdrop").addEventListener("click", closeBag);
 
-/* =========================
-   CHECKOUT + PAYMENT (demo)
-   Nothing is charged. Card details are only checked for format;
-   they are never saved or sent anywhere.
-========================= */
+/* checkout + payment */
 /* 7% off with the code from the text sign-up */
 const DISCOUNT_CODE = "GANSWON7";
 const DISCOUNT_RATE = 0.07;
@@ -500,13 +475,7 @@ $("promoApply").addEventListener("click", () => {
   fillCheckout();
 });
 
-/* =========================
-   SMS SIGN-UP POP-UP
-   Shows once, a few seconds after someone reaches the shop.
-   Tapping the red 간손원 band opens it again.
-   LATER: send the phone number to your texting service here
-   (see the comment in the submit handler).
-========================= */
+/* sms sign-up pop-up */
 const smsPop = $("smsPop");
 let smsSeen = false;
 try { smsSeen = localStorage.getItem("ganswon-sms-seen") === "1"; } catch (e) {}
@@ -579,11 +548,7 @@ $("smsShop").addEventListener("click", () => {
   location.hash = "shop";
 });
 
-/* =========================
-   API 1: ZIP AUTO-FILL  —  Zippopotam.us (https://www.zippopotam.us)
-   Free, no key. When 5 digits are typed, we look up the ZIP
-   and fill in the City and State boxes.
-========================= */
+/* api 1: zip auto-fill (zippopotam.us, free, no key) */
 // backup ZIPs, used only if the live API can't be reached
 const BACKUP_ZIPS = {
   "19114": ["Philadelphia", "PA"], "19103": ["Philadelphia", "PA"],
@@ -658,9 +623,7 @@ $("coZip").addEventListener("input", async () => {
             "Found: " + place["place name"] + ", " + place["state abbreviation"]);
 });
 
-/* =========================
-   MENU
-========================= */
+/* menu */
 const menuButton = $("menuButton");
 const menuOverlay = $("menuOverlay");
 
@@ -690,9 +653,7 @@ document.addEventListener("keydown", e => {
   closeBag();
 });
 
-/* =========================
-   SCROLL REVEAL — things fade up as you reach them
-========================= */
+/* scroll reveal */
 const revealer = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add("in"); revealer.unobserve(e.target); }
@@ -700,14 +661,8 @@ const revealer = new IntersectionObserver(entries => {
 }, { threshold: 0.15 });
 document.querySelectorAll(".reveal").forEach(el => revealer.observe(el));
 
-/* =========================
-   NEVER-STOPPING STOPWATCH (footer, bottom left)
-   It stays at 000:00:00:00.00 until the official launch.
-   ON LAUNCH DAY: put the launch date and time below, for example
-     const LAUNCH_DATE = new Date("2027-01-15T12:00:00");
-   From then on it counts up forever and never resets, even after a reload.
-   Shows DAYS:HOURS:MINUTES:SECONDS.HUNDREDTHS
-========================= */
+/* never-stopping stopwatch */
+// on launch day set this, e.g. new Date("2027-01-15T12:00:00")
 const LAUNCH_DATE = null;   // not launched yet
 const pad = (n, len) => String(n).padStart(len, "0");
 
@@ -724,9 +679,7 @@ function tickStopwatch() {
 }
 requestAnimationFrame(tickStopwatch);
 
-/* =========================
-   BAG CAROUSEL — one bag at a time, slides every 4 seconds
-========================= */
+/* bag carousel */
 (function () {
   const track = $("productGrid");
   const count = track.children.length;
@@ -749,12 +702,7 @@ requestAnimationFrame(tickStopwatch);
   restart();
 })();
 
-/* =========================
-   ROOM UNDER THE FOOTER
-   The footer sits right under the shop. Extra empty space is added
-   *below* it only when needed, so SHOP NOW can still scroll the
-   header to the very top of the screen.
-========================= */
+/* room under the footer */
 function fitBottom() {
   // stretch the bag row so header + bags + band + footer fill the screen
   // exactly: no empty space at the bottom, and SHOP NOW still lands on the header
@@ -783,9 +731,7 @@ function fitBottom() {
 window.addEventListener("resize", fitBottom);
 window.addEventListener("load", fitBottom);
 
-/* =========================
-   START
-========================= */
+/* start */
 drawBag();
 route();
 fitBottom();

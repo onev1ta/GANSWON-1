@@ -1,6 +1,4 @@
-/* =========================
-   GENERAL
-========================= */
+/* general */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 [hidden] { display: none !important; }
 
@@ -15,9 +13,7 @@ html { scroll-behavior: smooth; }
 
 button { font-family: inherit; }
 
-/* =========================
-   OPENING SCREEN / HERO
-========================= */
+/* opening screen / hero */
 .hero {
   position: relative;
   height: 100vh;
@@ -88,9 +84,7 @@ body.loaded .hero-mark {
 .hero-shop:hover { border-bottom-color: #171717; }
 body.loaded .hero-shop { opacity: 1; }
 
-/* =========================
-   HEADER
-========================= */
+/* header */
 header {
   position: relative;
   display: flex;
@@ -120,9 +114,7 @@ header {
   object-fit: contain;
 }
 
-/* =========================
-   HAMBURGER MENU
-========================= */
+/* hamburger menu */
 .menu {
   position: absolute;
   right: 25px;
@@ -147,9 +139,7 @@ header {
 .menu.active span:first-child { transform: translateY(3.75px) rotate(45deg); }
 .menu.active span:nth-child(2) { transform: translateY(-3.75px) rotate(-45deg); }
 
-/* =========================
-   SEARCH (LEFT)
-========================= */
+/* search */
 .search-btn {
   position: absolute;
   left: 25px;
@@ -248,9 +238,7 @@ header {
   padding: 60px 0;
 }
 
-/* =========================
-   MENU OVERLAY
-========================= */
+/* menu overlay */
 .menu-overlay {
   position: fixed;
   inset: 0;
@@ -280,10 +268,7 @@ header {
 }
 .menu-links a:hover { opacity: 0.5; }
 
-/* =========================
-   VIEWS — only one shows at a time
-   (script.js sets body data-view="shop | product | checkout | thanks")
-========================= */
+/* views */
 .view-product, .view-checkout, .view-thanks { display: none; }
 body[data-view="product"]  .view-product  { display: block; }
 body[data-view="checkout"] .view-checkout { display: block; }
@@ -294,9 +279,7 @@ body:not([data-view="shop"]) .view-shop { display: none; }
 body[data-view="checkout"] header,
 body[data-view="thanks"] header { display: none; }
 
-/* =========================
-   BAG BUTTON (header, right)
-========================= */
+/* bag button */
 .bag-btn {
   position: absolute;
   left: 25px;                  /* where the search used to be */
@@ -330,9 +313,7 @@ body[data-view="thanks"] header { display: none; }
 .bag-btn.bump { animation: bump 0.4s ease; }
 @keyframes bump { 50% { transform: translateY(-50%) scale(1.2); } }
 
-/* =========================
-   SHOP — NEW ARRIVALS
-========================= */
+/* shop */
 .arrivals {
   padding: 10px 40px 4px;
   display: flex;
@@ -445,9 +426,7 @@ body.loaded .product:nth-child(4) { transition-delay: 0.3s; }
   color: #77736D;
 }
 
-/* =========================
-   MARQUEE (moving text band)
-========================= */
+/* marquee */
 .marquee {
   overflow: hidden;
   cursor: pointer;
@@ -478,9 +457,7 @@ body.loaded .product:nth-child(4) { transition-delay: 0.3s; }
 }
 @keyframes marquee { to { transform: translateX(-50%); } }
 
-/* =========================
-   SMS SIGN-UP POP-UP — minimal, black & cream
-========================= */
+/* sms sign-up pop-up */
 .sms-pop {
   position: fixed;
   inset: 0;
@@ -598,9 +575,7 @@ body.loaded .product:nth-child(4) { transition-delay: 0.3s; }
 }
 .sms-copied { margin: 10px 0 22px; font-size: 9px; letter-spacing: 2px; color: #77736D; }
 
-/* =========================
-   DISCOUNT CODE (checkout)
-========================= */
+/* discount code */
 .promo { display: flex; gap: 8px; margin: 12px 0 4px; }
 .promo input {
   flex: 1;
@@ -629,10 +604,7 @@ body.loaded .product:nth-child(4) { transition-delay: 0.3s; }
 .promo-msg { min-height: 14px; font-size: 10px; letter-spacing: 1px; color: #77736D; margin-bottom: 6px; }
 .bag-row.discount { color: #A3161E; }
 
-/* =========================
-   PRODUCT PAGE
-   (big bag, BUY NOW / ADD TO CART, color + price, thumbnails, description)
-========================= */
+/* product page */
 .view-product { padding: 6px 40px 60px; }
 
 .back-link {
@@ -782,9 +754,7 @@ body.loaded .product:nth-child(4) { transition-delay: 0.3s; }
   color: #A3161E;
 }
 
-/* =========================
-   BUTTONS
-========================= */
+/* buttons */
 .btn-dark, .btn-line {
   display: block;
   width: 100%;
@@ -812,9 +782,7 @@ body.loaded .product:nth-child(4) { transition-delay: 0.3s; }
 }
 .btn-line:hover { background: #171717; color: #F5F4F0; }
 
-/* =========================
-   SHOPPING BAG DRAWER
-========================= */
+/* shopping bag drawer */
 .bag-backdrop {
   position: fixed;
   inset: 0;
@@ -915,9 +883,7 @@ body.bag-open .bag-drawer { transform: none; }
 .bag-row.total { font-weight: 700; font-size: 13px; padding-top: 10px; }
 .bag-note { font-size: 10px; color: #77736D; margin: 4px 0 14px; }
 
-/* =========================
-   CHECKOUT
-========================= */
+/* checkout */
 .view-checkout { padding: 28px 40px 60px; max-width: 1100px; margin: 0 auto; }
 
 .co-top {
@@ -1021,9 +987,7 @@ body.bag-open .bag-drawer { transform: none; }
 .co-summary li img { width: 56px; height: 56px; object-fit: contain; }
 .co-summary li small { display: block; color: #77736D; margin-top: 2px; }
 
-/* =========================
-   ORDER CONFIRMED
-========================= */
+/* order confirmed */
 .view-thanks {
   min-height: 100vh;
   flex-direction: column;
@@ -1039,9 +1003,7 @@ body.bag-open .bag-drawer { transform: none; }
 .thanks-small { color: #77736D; }
 .view-thanks .btn-dark { width: auto; margin-top: 16px; padding: 12px 30px; }
 
-/* =========================
-   FOOTER
-========================= */
+/* footer */
 footer {
   display: flex;
   flex-direction: column;
@@ -1056,9 +1018,7 @@ footer {
 body[data-view="checkout"] footer,
 body[data-view="thanks"] footer { display: none; }
 
-/* =========================
-   INFO SLIDER
-========================= */
+/* info slider */
 .info {
   display: flex;
   align-items: center;
@@ -1124,16 +1084,12 @@ body[data-view="thanks"] footer { display: none; }
   white-space: nowrap;
 }
 
-/* =========================
-   TABLET
-========================= */
+/* tablet */
 @media (max-width: 1000px) {
   .pv-grid { gap: 30px; }
 }
 
-/* =========================
-   MOBILE
-========================= */
+/* mobile */
 @media (max-width: 600px) {
   header { padding: 18px 15px; }
   .logo { font-size: 21px; letter-spacing: 4px; }
@@ -1191,9 +1147,7 @@ body[data-view="thanks"] footer { display: none; }
   .sms-title { font-size: 38px; }
 }
 
-/* =========================
-   ACCESSIBILITY
-========================= */
+/* accessibility */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     scroll-behavior: auto !important;
@@ -1223,9 +1177,7 @@ body[data-view="thanks"] footer { display: none; }
 .products .product-info { display: none !important; }
 
 
-/* =========================
-   BAG CAROUSEL (replaces the grid / info slider)
-========================= */
+/* bag carousel */
 .bag-carousel {
   display: flex;
   align-items: center;
@@ -1263,9 +1215,7 @@ body[data-view="thanks"] footer { display: none; }
 }
 
 
-/* =========================
-   API FEATURES
-========================= */
+/* api features */
 .pv-price-wrap { display: inline-flex; align-items: center; gap: 8px; }
 #currency {
   font-family: inherit;
