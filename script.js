@@ -246,7 +246,7 @@ $("buyNow").addEventListener("click", () => {
 });
 
 /* =========================
-   API 2: CURRENCY SWITCHER  —  Frankfurter (https://www.frankfurter.app)
+   API 2: CURRENCY SWITCHER  —  Frankfurter (https://frankfurter.dev)
    Free, no key. We ask for today's rate from USD to the chosen currency,
    then show the bag's price converted. Cart and checkout stay in USD.
 ========================= */
@@ -274,7 +274,7 @@ $("currency").addEventListener("change", async () => {
   }
   $("rateNote").textContent = "Getting today's rate…";
   try {
-    const res = await fetch("https://api.frankfurter.app/latest?from=USD&to=" + currency);
+    const res = await fetch("https://api.frankfurter.dev/v1/latest?base=USD&symbols=" + currency);
     if (!res.ok) throw new Error("bad response");
     const data = await res.json();          // e.g. { rates: { EUR: 0.92 }, date: "2026-11-24" }
     rate = data.rates[currency];
@@ -646,6 +646,15 @@ function setMenu(open) {
 }
 menuButton.addEventListener("click", () => setMenu(!menuOverlay.classList.contains("open")));
 menuOverlay.querySelectorAll("a").forEach(link => link.addEventListener("click", () => setMenu(false)));
+
+// ABOUT: show / hide the short blurb inside the menu
+$("aboutToggle").addEventListener("click", () => {
+  const open = $("menuAbout").hidden;
+  $("menuAbout").hidden = !open;
+  $("aboutToggle").setAttribute("aria-expanded", open);
+});
+// GET 7% OFF: close the menu and open the text sign-up
+$("menuSms").addEventListener("click", () => { setMenu(false); openSms(); });
 
 document.addEventListener("keydown", e => {
   if (e.key !== "Escape") return;

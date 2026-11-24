@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- class project, not launched yet: ask search engines not to list it (remove on launch day) -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="GANSWON: art-style tote bags inspired by Korean seal stamps.">
   <title>GANSWON</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -68,8 +71,12 @@
   <nav class="menu-overlay" id="menuOverlay">
     <div class="menu-links">
       <a href="#shop">SHOP</a>
-      <a href="#about">ABOUT</a>
-      <a href="#contact">CONTACT</a>
+      <button type="button" id="aboutToggle" aria-expanded="false" aria-controls="menuAbout">ABOUT</button>
+      <p class="menu-about" id="menuAbout" hidden>
+        GANSWON (간손원) makes art-style tote bags inspired by Korean seal stamps.
+        Each design is made in small batches, so quantities are limited.
+      </p>
+      <button type="button" id="menuSms">GET 7% OFF</button>
     </div>
   </nav>
 

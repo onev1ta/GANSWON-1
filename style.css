@@ -1319,3 +1319,16 @@ header .brand { position: relative; top: 18px; }
   letter-spacing: 9px;
 }
 @media (max-width: 600px) { .logo { font-size: 25px; letter-spacing: 6px; } }
+
+/* menu: ABOUT opens a short blurb, GET 7% OFF opens the text sign-up */
+.menu-links button {
+  background: none; border: none; cursor: pointer; padding: 0;
+  font: inherit; color: #171717; font-size: 30px; letter-spacing: 4px;
+  transition: opacity 0.2s ease;
+}
+.menu-links button:hover { opacity: 0.5; }
+.menu-about {
+  max-width: 300px; margin: -12px auto 0; text-align: center;
+  font-size: 12px; line-height: 1.8; letter-spacing: 1px; color: #77736D;
+}
+@media (max-width: 600px) { .menu-links button { font-size: 25px; } }
