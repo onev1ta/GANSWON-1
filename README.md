@@ -1,6 +1,6 @@
 # GANSWON (간손원)
 
-A minimalist streetwear shop for **GANSWON**, a brand of art-style tote bags inspired by Korean seal stamps.
+A minimalist streetwear shop for **GANSWON** (간손원).
 Final project for Web Design, Fall 2026.
 
 **Live site:** https://onev1ta.github.io/GANSWON-1/
