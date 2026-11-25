@@ -76,11 +76,11 @@ function toTop() {
   requestAnimationFrame(() => { window.scrollTo(0, 0); html.style.scrollBehavior = old; });
 }
 
-function snapTo(el) {
+function snapTo(el, gap = 0) {
   const html = document.documentElement;
   const old = html.style.scrollBehavior;
   html.style.scrollBehavior = "auto";
-  window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY);
+  window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - gap);
   html.style.scrollBehavior = old;
 }
 
@@ -96,6 +96,10 @@ function route() {
     openProduct(product);
     showView("product");
     toTop();
+    if (window.innerWidth <= 600) {
+      requestAnimationFrame(() => requestAnimationFrame(() =>
+        snapTo(document.querySelector("header .korean-logo"), 10)));
+    }
   } else if (hash === "checkout") {
     endIntro();
     if (cart.length === 0) { location.hash = "shop"; return; }
@@ -219,9 +223,11 @@ let rate = 1;
 
 function showPrice() {
   const amount = current.price * rate;
-  $("pvPrice").textContent = new Intl.NumberFormat(undefined, {
+  const text = new Intl.NumberFormat(undefined, {
     style: "currency", currency: currency
   }).format(amount);
+  $("pvPrice").textContent = text;
+  $("pvPriceTop").textContent = text;
 }
 
 const BACKUP_RATES = { EUR: 0.92, GBP: 0.79, JPY: 151.3, KRW: 1380, CAD: 1.39 };

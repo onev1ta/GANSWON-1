@@ -1239,3 +1239,12 @@ header .brand { position: relative; top: 18px; }
 
 .bag-carousel { transform: translateY(-28px); }
 @media (max-width: 600px) { .bag-carousel { transform: translateY(-20px); } }
+
+
+.pv-head-top { display: none; }
+@media (max-width: 600px) {
+  .pv-head-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 14px; }
+  .pv-head-top .pv-name-top { margin-bottom: 0; }
+  .pv-price-top { font-size: 14px; white-space: nowrap; }
+  .pv-row .pv-price { display: none; }
+}
