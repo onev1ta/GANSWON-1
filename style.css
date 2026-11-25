@@ -1238,4 +1238,4 @@ header .brand { position: relative; top: 18px; }
 @media (max-width: 600px) { .menu-links button { font-size: 25px; } }
 
 .bag-carousel { transform: translateY(-28px); }
-@media (max-width: 600px) { .bag-carousel { transform: translateY(-44px); } }
+@media (max-width: 600px) { .bag-carousel { transform: translateY(-20px); } }
