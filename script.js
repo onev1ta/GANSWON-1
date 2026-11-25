@@ -662,7 +662,12 @@ requestAnimationFrame(tickStopwatch);
   });
 
   track.addEventListener("click", e => { if (moved) { e.preventDefault(); moved = false; } }, true);
-  restart();
+  let started = false;
+  new IntersectionObserver(entries => {
+    if (!entries[0].isIntersecting) { clearInterval(timer); return; }
+    if (!started) { started = true; go(0); }
+    restart();
+  }, { threshold: 0.5 }).observe(track.parentElement);
 })();
 
 function fitBottom() {
