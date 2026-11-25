@@ -1236,3 +1236,6 @@ header .brand { position: relative; top: 18px; }
   font-size: 12px; line-height: 1.8; letter-spacing: 1px; color: #77736D;
 }
 @media (max-width: 600px) { .menu-links button { font-size: 25px; } }
+
+.bag-carousel { transform: translateY(-28px); }
+@media (max-width: 600px) { .bag-carousel { transform: translateY(-44px); } }
