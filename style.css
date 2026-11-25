@@ -1090,7 +1090,7 @@ body[data-view="thanks"] footer { display: none; }
   .product-info { opacity: 1; transform: none; }
   .product-name, .product-price { font-size: 10px; }
   .marquee { margin: 0; padding: 6px 0; }
-  footer { padding-bottom: 14px; }
+  footer { padding-bottom: 38px; }
   .marquee-track { font-size: 10px; gap: 40px; }
 
   .view-product { padding: 4px 16px 40px; }
