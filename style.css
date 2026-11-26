@@ -1291,3 +1291,8 @@ header .brand { position: relative; top: 18px; }
   .pv-thumbs { order: 8; justify-content: center; margin-top: 26px; }
   .pv-note { order: 9; text-align: center; margin-top: 22px; }
 }
+
+@media (max-width: 600px) {
+  .hero { height: calc(100lvh + 90px); }
+  .hero-shop { bottom: calc(126px + 100lvh - 100svh); }
+}
