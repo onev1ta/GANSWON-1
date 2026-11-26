@@ -1296,3 +1296,10 @@ header .brand { position: relative; top: 18px; }
   .hero { height: calc(100lvh + 90px); }
   .hero-shop { bottom: calc(126px + 100lvh - 100svh); }
 }
+
+@media (max-width: 600px) {
+  header#shop::before {
+    content: ""; position: absolute; left: 0; right: 0; top: -90px; height: 90px;
+    background: #F5F4F0; pointer-events: none;
+  }
+}
