@@ -227,7 +227,7 @@ function showPrice() {
     style: "currency", currency: currency
   }).format(amount);
   $("pvPrice").textContent = text;
-  $("pvPriceTop").textContent = text;
+  $("pvPriceTop").textContent = $("pvPriceSide").textContent = text;
 }
 
 const BACKUP_RATES = { EUR: 0.92, GBP: 0.79, JPY: 151.3, KRW: 1380, CAD: 1.39 };

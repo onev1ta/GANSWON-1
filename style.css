@@ -1249,9 +1249,45 @@ header .brand { position: relative; top: 18px; }
   .pv-row .pv-price { display: none; }
 }
 
+
+.hero-shop { color: #F5F4F0; }
+
+.pv-stage { display: flex; flex-direction: column; }
+.pv-media { background: #ECEAE6; }
+.pv-price-side { display: none; }
+.pv-info .pv-name { font-family: "Times New Roman", Times, Georgia, serif; font-weight: 400; }
+.pv-buynow, .pv-add { border-radius: 0; }
+
+@media (max-width: 600px) {
+  .pv-head-top { order: 2; margin: 14px 0 0; }
+  .pv-head-top .pv-name-top { font-size: 15px; letter-spacing: 2px; font-weight: 400; }
+  .pv-price-top { font-size: 15px; letter-spacing: 1px; }
+  .pv-media { margin: 0 -16px; padding: 28px 16px; }
+  .pv-grid { gap: 22px; }
+  .pv-desc { font-size: 13px; line-height: 1.7; }
+}
+
 @media (min-width: 601px) {
-  .pv-head-top { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; margin-bottom: 22px; }
-  .pv-head-top .pv-name-top { display: block; margin-bottom: 0; }
-  .pv-price-top { font-size: 16px; letter-spacing: 2px; white-space: nowrap; }
-  .pv-name-side, .pv-row .pv-price { display: none; }
+  .view-product { padding: 0; }
+  .view-product .back-link { display: inline-block; padding: 14px 40px; }
+  .pv-grid { grid-template-columns: 1fr 1fr; gap: 0; align-items: stretch; min-height: calc(100vh - 150px); max-width: none; margin: 0; }
+  .pv-stage { background: #ECEAE6; justify-content: center; }
+  .pv-head-top { display: none; }
+  .pv-media { background: none; min-height: calc(100vh - 150px); display: flex; align-items: center; justify-content: center; }
+  .pv-info {
+    display: flex; flex-direction: column; justify-content: center;
+    max-width: 420px; width: 100%; margin: 0 auto; padding: 40px 0 60px;
+  }
+  .pv-info .pv-name-side { display: block; order: 1; text-align: center; font-size: 26px; letter-spacing: 3px; margin-bottom: 8px; }
+  .pv-price-side { display: block; order: 2; text-align: center; font-family: "Times New Roman", Times, Georgia, serif; font-size: 18px; letter-spacing: 1px; margin: 0 0 30px; }
+  .pv-desc { order: 3; font-size: 13px; line-height: 1.8; margin: 0 0 26px; }
+  .pv-row { order: 4; border-top: 1px solid rgba(23,23,23,0.1); border-bottom: 1px solid rgba(23,23,23,0.1); padding: 14px 0; margin: 0 0 6px; }
+  .pv-row .pv-price { display: none; }
+  .pv-color { font-weight: 400; }
+  .pv-color::before { content: "COLOUR"; color: #77736D; margin-right: 26px; }
+  .pv-info .api-note { order: 5; }
+  .pv-soldout { order: 6; margin-top: 18px; }
+  .pv-actions { order: 7; }
+  .pv-thumbs { order: 8; justify-content: center; margin-top: 26px; }
+  .pv-note { order: 9; text-align: center; margin-top: 22px; }
 }
