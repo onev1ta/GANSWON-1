@@ -286,18 +286,18 @@ function drawBag() {
     const p = findProduct(i.id);
     return `
       <li class="bag-item">
-        <img src="${p.images[0]}" alt="">
-        <div>
+        <div class="bi-img"><img src="${p.images[0]}" alt=""></div>
+        <div class="bi-info">
           <p class="bi-name">${p.name}</p>
-          <p class="bi-opt">${i.opt}</p>
-          <div class="qty">
-            <button type="button" data-act="minus" data-idx="${idx}" aria-label="One less">−</button>
-            <span>${i.qty}</span>
-            <button type="button" data-act="plus" data-idx="${idx}" aria-label="One more">+</button>
+          <p class="bi-opt"><b>Color:</b> ${i.opt}</p>
+          <div class="bi-bottom">
+            <div class="qty">
+              <button type="button" data-act="minus" data-idx="${idx}" aria-label="One less">−</button>
+              <span>${i.qty}</span>
+              <button type="button" data-act="plus" data-idx="${idx}" aria-label="One more">+</button>
+            </div>
+            <p class="bi-price">${money(p.price * i.qty)}</p>
           </div>
-        </div>
-        <div class="bi-price">
-          <p>${money(p.price * i.qty)}</p>
           <button type="button" class="bi-remove" data-act="remove" data-idx="${idx}">REMOVE</button>
         </div>
       </li>`;

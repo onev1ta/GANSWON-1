@@ -15,7 +15,7 @@
   <meta property="og:url" content="https://onev1ta.github.io/GANSWON-1/">
   <meta name="twitter:card" content="summary_large_image">
   <title>GANSWON</title>
-  <link rel="stylesheet" href="style.css?v=cap">
+  <link rel="stylesheet" href="style.css?v=cart">
 </head>
 
 <body class="intro-playing">
@@ -136,18 +136,18 @@
 
   <div class="bag-backdrop" id="bagBackdrop"></div>
   <aside class="bag-drawer" id="bagDrawer" aria-label="Shopping bag">
-    <div class="bag-top">
-      <p>YOUR BAG</p>
-      <button class="bag-close" id="bagClose" aria-label="Close bag">&times;</button>
-    </div>
-
+    <div class="bag-top"><p>CART</p>
+      <button class="bag-close" id="bagClose" aria-label="Close bag">&times;</button></div>
     <ul class="bag-items" id="bagItems"></ul>
-    <p class="bag-empty" id="bagEmpty">YOUR BAG IS EMPTY</p>
-
+    <p class="bag-empty" id="bagEmpty">YOUR CART IS EMPTY</p>
     <div class="bag-bottom" id="bagBottom">
+      <label class="bag-label" for="bagNote">ORDER NOTE</label>
+      <textarea class="bag-note-box" id="bagNote" rows="3"></textarea>
       <div class="bag-row"><span>SUBTOTAL</span><span id="bagSubtotal">$0.00</span></div>
-      <p class="bag-note">Shipping calculated at checkout</p>
-      <a href="#checkout" class="btn-dark bag-checkout" id="goCheckout">CHECKOUT</a>
+      <p class="bag-note">Shipping, taxes, and discount codes calculated at checkout.</p>
+      <label class="bag-agree"><input type="checkbox" id="bagAgree"> <span>I AGREE WITH THE TERMS AND CONDITIONS</span></label>
+      <a href="#checkout" class="btn-dark bag-checkout" id="goCheckout">CHECK OUT</a>
+      <p class="bag-safe">Demo checkout. No real payment is taken.</p>
     </div>
   </aside>
 
@@ -272,6 +272,6 @@
 
   </footer>
 
-  <script src="script.js?v=forest"></script>
+  <script src="script.js?v=cart"></script>
 </body>
 </html>
